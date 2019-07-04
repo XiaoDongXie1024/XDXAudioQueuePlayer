@@ -162,15 +162,19 @@ SingletonM
     if (bytesRead > 0) {
         m_playCurrentPacket += numPackets;
     }else {
-        status = AudioFileClose(m_playFile);
-        if (status != noErr) {
-            NSLog(@"close file failed: %d", (int)status);
-        }
-        self.isPlayFileWorking = NO;
-        m_playCurrentPacket = 0;
+        [self resetFileForPlay];
     }
     
     return bytesRead;
+}
+
+- (void)resetFileForPlay {
+    OSStatus status = AudioFileClose(m_playFile);
+    if (status != noErr) {
+        NSLog(@"close file failed: %d", (int)status);
+    }
+    self.isPlayFileWorking = NO;
+    m_playCurrentPacket = 0;
 }
 
 #pragma mark - Private

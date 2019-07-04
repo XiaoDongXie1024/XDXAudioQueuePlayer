@@ -18,16 +18,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ms2-rV-Vz2">
-                                <rect key="frame" x="80" y="313" width="229" height="150"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ms2-rV-Vz2">
+                                <rect key="frame" x="0.0" y="144" width="414" height="150"/>
+                                <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="kOs-iN-l2E"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="Start Play"/>
                                 <connections>
                                     <action selector="startPlayDidClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Lwj-AL-Lzv"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UgR-Uw-CIk">
+                                <rect key="frame" x="0.0" y="374" width="414" height="150"/>
+                                <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="JO6-3J-j1B"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="150" id="pww-Ic-gUw"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="Stop Play"/>
+                                <connections>
+                                    <action selector="stopPlayDidClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Qnb-vx-hUJ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Ms2-rV-Vz2" secondAttribute="trailing" id="2DY-pE-0kn"/>
+                            <constraint firstItem="UgR-Uw-CIk" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="EZD-hp-FNU"/>
+                            <constraint firstItem="Ms2-rV-Vz2" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Ilm-oX-76D"/>
+                            <constraint firstItem="UgR-Uw-CIk" firstAttribute="top" secondItem="Ms2-rV-Vz2" secondAttribute="bottom" constant="80" id="Z3o-Rj-l7E"/>
+                            <constraint firstItem="Ms2-rV-Vz2" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="100" id="k0T-JF-rSs"/>
+                            <constraint firstItem="UgR-Uw-CIk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="nQw-mX-eyh"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>

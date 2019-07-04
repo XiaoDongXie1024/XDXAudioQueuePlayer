@@ -16,6 +16,8 @@
 
 @interface ViewController ()
 
+@property (nonatomic, assign) BOOL isStopPlay;
+
 @end
 
 @implementation ViewController
@@ -44,31 +46,34 @@
     [fileHandler configurePlayFilePath:filePath];
 }
 
+#pragma mark - Button Action
 - (IBAction)startPlayDidClicked:(id)sender {
     // Put audio data from audio file into audio data queue
     [self putAudioDataIntoDataQueue];
-    
-    // First put 5 frame audio data to work queue then start audio queue to read it to play.
-    [NSTimer scheduledTimerWithTimeInterval:0.01 repeats:YES block:^(NSTimer * _Nonnull timer) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            XDXCustomQueueProcess *audioBufferQueue = [XDXAudioQueuePlayer getInstance]->_audioBufferQueue;
-            int size = audioBufferQueue->GetQueueSize(audioBufferQueue->m_work_queue);
-            if (size > 5) {
-                [[XDXAudioQueuePlayer getInstance] startAudioPlayer];
-                [timer invalidate];
-            }
-        });
-    }];
-    
-
+    [[XDXAudioQueuePlayer getInstance] startAudioPlayer];
 }
 
+- (IBAction)stopPlayDidClicked:(id)sender {
+    [[XDXAudioQueuePlayer getInstance] stopAudioPlayer];
+    self.isStopPlay = YES;
+}
+
+#pragma mark - Other
 - (void)putAudioDataIntoDataQueue {
     AudioStreamPacketDescription *packetDesc = NULL;
     __block UInt32 readBytes;
     
     // Note: our send audio rate should > play audio rate
     [NSTimer scheduledTimerWithTimeInterval:0.09 repeats:YES block:^(NSTimer * _Nonnull timer) {
+        if (self.isStopPlay) {
+            self.isStopPlay = NO;
+            [timer invalidate];
+            [[XDXAudioFileHandler getInstance] resetFileForPlay];
+            XDXCustomQueueProcess *audioBufferQueue =  [XDXAudioQueuePlayer getInstance]->_audioBufferQueue;
+            audioBufferQueue->ResetFreeQueue(audioBufferQueue->m_work_queue, audioBufferQueue->m_free_queue);
+            return;
+        }
+        
         void *audioData = malloc([XDXAudioQueuePlayer audioBufferSize]);
         readBytes = [[XDXAudioFileHandler getInstance] readAudioFromFileBytesWithAudioDataRef:audioData
                                                                                    packetDesc:packetDesc

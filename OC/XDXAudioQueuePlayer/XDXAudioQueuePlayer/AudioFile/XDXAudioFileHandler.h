@@ -62,6 +62,12 @@ SingletonH
                                       packetDesc:(AudioStreamPacketDescription*)packetDesc
                                   readPacketsNum:(UInt32)readPacketsNum;
 
+
+/**
+ * reset file for play
+ */
+- (void)resetFileForPlay;
+
 @end
 
 NS_ASSUME_NONNULL_END

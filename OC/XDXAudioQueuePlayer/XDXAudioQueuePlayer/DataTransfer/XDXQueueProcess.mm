@@ -141,7 +141,6 @@ void XDXCustomQueueProcess::ResetFreeQueue(XDXCustomQueue *workQueue, XDXCustomQ
     if (workQueueSize > 0) {
         for (int i = 0; i < workQueueSize; i++) {
             XDXCustomQueueNode *node = DeQueue(workQueue);
-            CFRelease(node->data);
             node->data = NULL;
             EnQueue(freeQueue, node);
         }
